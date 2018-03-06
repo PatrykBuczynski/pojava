@@ -77,7 +77,6 @@ public class MedianFrame extends JFrame {
 		super(title, gc);
 		// TODO Auto-generated constructor stub
 	}
-	//Na te metode uwazaj cos z nia jest nie tak
 	public double policzMediane() {
 		
 		double mediana;
@@ -85,10 +84,10 @@ public class MedianFrame extends JFrame {
 		Collections.sort(liczby);
 		if(n % 2 == 0){
 			
-			mediana = ( liczby.get(n/2) + liczby.get( (n/2) + 1 ) )/2 ;
+			mediana = ( liczby.get((n/2)-1) + liczby.get(n/2))/2 ;
 		}
 		else {
-			mediana = liczby.get((int)(liczby.size()/2) + 1);
+			mediana = liczby.get((int)(n/2));
 		}
 			
 		return mediana;
