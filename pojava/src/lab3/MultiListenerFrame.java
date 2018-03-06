@@ -60,21 +60,6 @@ public class MultiListenerFrame extends JFrame implements ItemListener {
 		}
 		
 	}
-
-	public MultiListenerFrame(GraphicsConfiguration gc) {
-		super(gc);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MultiListenerFrame(String title) throws HeadlessException {
-		super(title);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MultiListenerFrame(String title, GraphicsConfiguration gc) {
-		super(title, gc);
-		// TODO Auto-generated constructor stub
-	}
 	//@SuppressWarnings("deprecation")
 	@Override
 	public void itemStateChanged(ItemEvent e) {
