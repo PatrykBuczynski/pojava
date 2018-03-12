@@ -1,8 +1,10 @@
 package lab4;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -11,14 +13,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,8 +34,41 @@ public class MainFrame extends JFrame {
 		this.setSize(600, 500);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		menuBar = new JMenuBar();
+		lineWidthMenu = new JMenu("Line Width");
+		px1MenuItem = new JMenuItem("1px");
+		px2MenuItem = new JMenuItem("2px");
+		px1MenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lineWidth = 1;
+				center.revalidate();
+				center.repaint();
+				
+				}
+			
+		});
+		px2MenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lineWidth = 2;
+				center.revalidate();
+				center.repaint();
+				
+				}
+			
+		});
+		
+		lineWidthMenu.add(px1MenuItem);
+		lineWidthMenu.add(px2MenuItem);
+		menuBar.add(lineWidthMenu);
+		this.setJMenuBar(menuBar);
+		
 		pageStart = new JPanel();
 		noVerticesSlider = new JSlider(3,33,3);
+		vertices = noVerticesSlider.getValue();
 		noVerticesSlider.setMajorTickSpacing(10);
 		noVerticesSlider.setMinorTickSpacing(1);
 		noVerticesSlider.setPaintTicks(true);
@@ -44,11 +83,15 @@ public class MainFrame extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				vertices = noVerticesSlider.getValue();
+				center = new CenterPanel();
+				center.setBackground(Color.WHITE);
+				add(center, BorderLayout.CENTER);
+				center.revalidate();
+				center.repaint();
 			}
 		});
 		
 		lineStart = new JPanel(new GridLayout(2, 1));
-		lineStart.setPreferredSize(new Dimension(100,500));
 		lineStart.setBorder(BorderFactory.createTitledBorder("Polygon"));
 		regularRadioButton = new JRadioButton("Regular");
 		randomRadioButton = new JRadioButton ("Random");
@@ -59,13 +102,16 @@ public class MainFrame extends JFrame {
 		lineStart.add(regularRadioButton);
 		lineStart.add(randomRadioButton);
 		
-		
-		lineEnd = new JPanel(new GridLayout(1,2));	
+		lineEnd = new JPanel(new GridLayout(1, 2));	
+		xPosBox = Box.createVerticalBox();
+		yPosBox = Box.createVerticalBox();
+		lineEnd.add(xPosBox);
+		lineEnd.add(yPosBox);
 		xPosLabel = new JLabel("x pos.");
 		yPosLabel = new JLabel("y pos.");
-		lineEnd.add(xPosLabel);
-		lineEnd.add(yPosLabel);
-		
+		xPosBox.add(xPosLabel);
+		yPosBox.add(yPosLabel);
+
 		pageEnd = new JPanel();
 		bgButton = new JButton("BG color");
 		lnButton = new JButton("LN color");
@@ -79,8 +125,6 @@ public class MainFrame extends JFrame {
 		
 		
 		
-		
-		
 		this.setVisible(true);
 	}
 	
@@ -91,8 +135,8 @@ public class MainFrame extends JFrame {
 			center = new CenterPanel();
 			center.setBackground(Color.WHITE);
 			add(center, BorderLayout.CENTER);
-			revalidate();
-			repaint();
+			center.revalidate();
+			center.repaint();
 			
 			}
 		}
@@ -100,20 +144,67 @@ public class MainFrame extends JFrame {
 	public class CenterPanel extends JPanel {
 		
 		public CenterPanel() {
-			xPoints = new int [vertices];
-			yPoints = new int [vertices];
-			for(int i = 0; i < vertices; i++) {
-			xPoints[i] = (int)(2*Math.cos(Math.PI/2 + 2*Math.PI*i)/vertices);
-			yPoints[i] = (int)(2*Math.sin(Math.PI/2 + 2*Math.PI*i)/vertices);
-			}
-			figure = new Polygon(xPoints, yPoints, vertices);
+
 			}
 		@Override
 		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			Graphics2D g2d = (Graphics2D)g;
-			g.drawPol
-		}
+			if(regularRadioButton.isSelected() == true) {
+				super.paintComponent(g);
+				xPosBox.removeAll();
+				yPosBox.removeAll();
+				xPosBox.add(xPosLabel);
+				yPosBox.add(yPosLabel);
+				xPoints = new int [vertices];
+				yPoints = new int [vertices];
+				xPosText = new JTextField[vertices];
+				yPosText = new JTextField[vertices];
+				for(int i = 0; i < vertices; i++) {
+					xPoints[i] = this.getSize().width/2 +  (int)(100*Math.cos((Math.PI/2 + 2*Math.PI*(i+1))/vertices));
+					yPoints[i] = this.getSize().height/2 + (int)(100*Math.sin((Math.PI/2 + 2*Math.PI*(i+1))/vertices));
+					xPosText[i] = new JTextField("" + xPoints[i]);
+					yPosText[i] = new JTextField("" + yPoints[i]);
+					xPosBox.add(xPosText[i]);
+					yPosBox.add(yPosText[i]);
+					lineEnd.validate();
+					
+				}
+				figure = new Polygon(xPoints, yPoints, vertices);
+				Graphics2D g2d = (Graphics2D) g;
+				BasicStroke bs1 = new BasicStroke(lineWidth);
+				g2d.setStroke(bs1);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(figure);
+			}
+			if(randomRadioButton.isSelected() == true) {
+				super.paintComponent(g);
+				xPosBox.removeAll();
+				yPosBox.removeAll();
+				xPosBox.add(xPosLabel);
+				yPosBox.add(yPosLabel);
+				xPoints = new int [vertices];
+				yPoints = new int [vertices];
+				xPosText = new JTextField[vertices];
+				yPosText = new JTextField[vertices];
+				for(int i = 0; i < vertices; i++) {
+					xPoints[i] = this.getSize().width/2 + (int) (Math.random()*200-100);
+					yPoints[i] = this.getSize().height/2 + (int) (Math.random()*200-100);
+					xPosText[i] = new JTextField("" + xPoints[i]);
+					yPosText[i] = new JTextField("" + yPoints[i]);
+					xPosBox.add(xPosText[i]);
+					yPosBox.add(yPosText[i]);
+					lineEnd.validate();
+					
+				}
+				figure = new Polygon(xPoints, yPoints, vertices);
+				Graphics2D g2d = (Graphics2D) g;
+				BasicStroke bs1 = new BasicStroke(lineWidth);
+				g2d.setStroke(bs1);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(figure);
+				
+			}
+		};
+
 	}
 	
 
@@ -121,6 +212,7 @@ public class MainFrame extends JFrame {
 		// TODO Auto-generated method stub
 		
 		MainFrame frame = new MainFrame();
+
 		
 
 	}
@@ -137,10 +229,19 @@ public class MainFrame extends JFrame {
 	JPanel lineStart;
 	JPanel lineEnd;
 	JMenu lineWidthMenu;
+	JMenuBar menuBar;
+	JMenuItem px1MenuItem;
+	JMenuItem px2MenuItem;
 	JLabel noVerticesLabel;
 	JLabel xPosLabel;
 	JLabel yPosLabel;
+	Box xPosBox;
+	Box yPosBox;
+
+	JTextField [] xPosText;
+	JTextField [] yPosText;
 	int vertices;
+	int lineWidth;
 	int [] xPoints;
 	int [] yPoints;
 	Polygon figure;
