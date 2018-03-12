@@ -3,8 +3,6 @@ package lab4;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -16,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -123,6 +122,8 @@ public class MainFrame extends JFrame {
 		this.add(lineStart, BorderLayout.LINE_START);
 		drawButton.addActionListener(new DrawButtonActionListener());
 		
+	
+		
 		
 		
 		this.setVisible(true);
@@ -142,6 +143,7 @@ public class MainFrame extends JFrame {
 		}
 		
 	public class CenterPanel extends JPanel {
+		protected JColorChooser tcc;
 		
 		public CenterPanel() {
 
@@ -186,10 +188,16 @@ public class MainFrame extends JFrame {
 				xPosText = new JTextField[vertices];
 				yPosText = new JTextField[vertices];
 				for(int i = 0; i < vertices; i++) {
-					xPoints[i] = this.getSize().width/2 + (int) (Math.random()*200-100);
-					yPoints[i] = this.getSize().height/2 + (int) (Math.random()*200-100);
-					xPosText[i] = new JTextField("" + xPoints[i]);
-					yPosText[i] = new JTextField("" + yPoints[i]);
+					
+					xPosText[i] = new JTextField("" + (this.getSize().width/2 + ((int)(Math.random()*200)- 100)));
+					yPosText[i] = new JTextField("" + (this.getSize().height/2 + ((int) (Math.random()*200)-100)));
+					xPoints[i] = Integer.parseInt(xPosText[i].getText());
+					yPoints[i] = Integer.parseInt(yPosText[i].getText());
+					
+//					xPoints[i] = this.getSize().width/2 + (int) (Math.random()*200-100);
+//					yPoints[i] = this.getSize().height/2 + (int) (Math.random()*200-100);
+//					xPosText[i] = new JTextField("" + xPoints[i]);
+//					yPosText[i] = new JTextField("" + yPoints[i]);
 					xPosBox.add(xPosText[i]);
 					yPosBox.add(yPosText[i]);
 					lineEnd.validate();
@@ -203,6 +211,7 @@ public class MainFrame extends JFrame {
 				g.drawPolygon(figure);
 				
 			}
+
 		};
 
 	}
@@ -216,7 +225,6 @@ public class MainFrame extends JFrame {
 		
 
 	}
-	
 	JSlider noVerticesSlider;
 	JButton drawButton;
 	JButton bgButton;
@@ -237,6 +245,7 @@ public class MainFrame extends JFrame {
 	JLabel yPosLabel;
 	Box xPosBox;
 	Box yPosBox;
+	JColorChooser tcc;
 
 	JTextField [] xPosText;
 	JTextField [] yPosText;
