@@ -143,7 +143,6 @@ public class MainFrame extends JFrame {
 		}
 		
 	public class CenterPanel extends JPanel {
-		protected JColorChooser tcc;
 		
 		public CenterPanel() {
 
