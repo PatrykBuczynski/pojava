@@ -39,9 +39,6 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				lineWidth = 1;
-				center.revalidate();
-				center.repaint();
-				
 				}
 			
 		});
@@ -50,8 +47,6 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				lineWidth = 2;
-				center.revalidate();
-				center.repaint();
 				
 				}
 			
@@ -63,15 +58,16 @@ public class MainFrame extends JFrame {
 		this.setJMenuBar(menuBar);
 		
 		pageStart = new PageStartPanel(this);
-		lineStart = new LineStartPanel(new GridLayout(2,1));
-		lineEnd = new LineEndPanel(new GridLayout(1,2));
-		pageEnd = new PageEndPanel();
-		center = new CenterPanel(lineEnd, lineStart, pageStart);
+		lineStart = new LineStartPanel(new GridLayout(2,1), this);
+		lineEnd = new LineEndPanel(new GridLayout(1,2), this);
+		pageEnd = new PageEndPanel(this);
+		center = new CenterPanel(this);
+		
 		this.add(pageStart, BorderLayout.PAGE_START);
 		this.add(lineStart, BorderLayout.LINE_START);
-		this.add(center, BorderLayout.CENTER);
 		this.add(lineEnd, BorderLayout.LINE_END);
 		this.add(pageEnd, BorderLayout.PAGE_END);
+		this.add(center, BorderLayout.CENTER);
 		
 		lineStart.setBorder(BorderFactory.createTitledBorder("Polygon"));
 		
@@ -81,20 +77,6 @@ public class MainFrame extends JFrame {
 		
 	}
 
-	public MainFrame(GraphicsConfiguration gc) {
-		super(gc);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MainFrame(String title) throws HeadlessException {
-		super(title);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MainFrame(String title, GraphicsConfiguration gc) {
-		super(title, gc);
-		// TODO Auto-generated constructor stub
-	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

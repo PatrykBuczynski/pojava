@@ -2,7 +2,6 @@ package lab4_v2;
 
 import java.awt.LayoutManager;
 
-import javax.swing.JPanel;
 import javax.swing.*;
 
 public class LineEndPanel extends JPanel {
@@ -13,13 +12,15 @@ public class LineEndPanel extends JPanel {
 	Box yPosBox;
 	JTextField [] xPosText;
 	JTextField [] yPosText;
+	MainFrame frame;
 
 	public LineEndPanel() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LineEndPanel(LayoutManager layout) {
+	public LineEndPanel(LayoutManager layout, MainFrame frame) {
 		super(layout);
+		this.frame = frame;
 		xPosLabel = new JLabel("X pos.");
 		yPosLabel = new JLabel("Y pos.");
 		xPosBox = Box.createVerticalBox();

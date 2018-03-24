@@ -77,18 +77,7 @@ public class MainFrame extends JFrame {
 		pageStart.add(noVerticesLabel);
 		pageStart.add(noVerticesSlider);
 		pageStart.add(drawButton);
-		noVerticesSlider.addChangeListener(new ChangeListener() {
-			
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				vertices = noVerticesSlider.getValue();
-				center = new CenterPanel();
-				center.setBackground(Color.WHITE);
-				add(center, BorderLayout.CENTER);
-				center.revalidate();
-				center.repaint();
-			}
-		});
+		
 		
 		lineStart = new JPanel(new GridLayout(2, 1));
 		lineStart.setBorder(BorderFactory.createTitledBorder("Polygon"));
@@ -121,6 +110,15 @@ public class MainFrame extends JFrame {
 		this.add(lineEnd, BorderLayout.LINE_END);
 		this.add(lineStart, BorderLayout.LINE_START);
 		drawButton.addActionListener(new DrawButtonActionListener());
+		noVerticesSlider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				vertices = noVerticesSlider.getValue();
+				center.repaint();
+
+			}
+		});
 		
 	
 		
