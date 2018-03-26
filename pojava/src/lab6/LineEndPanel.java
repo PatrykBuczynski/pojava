@@ -44,6 +44,39 @@ public class LineEndPanel extends JPanel {
 		this.add(square);
 		this.add(curve);
 		
+		eraser.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				isEraser = true;
+				isPencil = false;
+				isLine = false;
+				isSquare = false;
+				isCurve = false;
+			}
+		});
+		pencil.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				isEraser = false;
+				isPencil = true;
+				isLine = false;
+				isSquare = false;
+				isCurve = false;
+			}
+		});
+		line.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				isEraser = false;
+				isPencil = false;
+				isLine = true;
+				isSquare = false;
+				isCurve = false;
+			}
+		});
 		square.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -53,6 +86,17 @@ public class LineEndPanel extends JPanel {
 				isLine = false;
 				isSquare = true;
 				isCurve = false;
+			}
+		});
+		curve.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				isEraser = false;
+				isPencil = false;
+				isLine = false;
+				isSquare = false;
+				isCurve = true;
 			}
 		});
 		
