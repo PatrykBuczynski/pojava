@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		this.setSize(800,500);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setTitle("Ubuntu Paint");
 		menuBar = new JMenuBar();
 		menu = new JMenu("Menu");

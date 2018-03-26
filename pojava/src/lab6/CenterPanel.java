@@ -27,8 +27,6 @@ public class CenterPanel extends JPanel {
 		yLineList = new ArrayList<Integer>();
 		xCurveList = new ArrayList<Integer>();
 		yCurveList = new ArrayList<Integer>();
-//
-		int counter = 0;
 		adapter = new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent e) {
@@ -77,13 +75,10 @@ public class CenterPanel extends JPanel {
 					 Graphics2D g2 = image.createGraphics();
 					 q.setCurve(xCurveList.get(i), yCurveList.get(i), e.getX(), e.getY(), xCurveList.get(i + 1), yCurveList.get(i + 1));
 					 g2.draw(q);
+
 		       
 		          }
-				if(xCurveList.size() == 3)
-				{
-					xCurveList.clear();
-					yCurveList.clear();
-				}
+
 				
 			}
 			CenterPanel.this.repaint();
@@ -108,20 +103,7 @@ public class CenterPanel extends JPanel {
 				if(frame.lineEnd.isCurve) {
 					ctrX = e.getX();
 					ctrY = e.getY();
-//					QuadCurve2D q = new QuadCurve2D.Double();
-//					for (int i = 0; i < xCurveList.size() - 1; i++) {
-//						
-//						 Graphics2D g2 = image.createGraphics();
-//						 q.setCurve(xCurveList.get(i), yCurveList.get(i), e.getX(), e.getY(), xCurveList.get(i + 1), yCurveList.get(i + 1));
-//						 g2.draw(q);
-//			       
-//			          }
-//					if(xCurveList.size() == 3)
-//					{
-//						xCurveList.clear();
-//						yCurveList.clear();
-//					}
-//					
+			
 				}
 				
 				if (e.getX() > squareX) squareW = e.getX() - squareX;
