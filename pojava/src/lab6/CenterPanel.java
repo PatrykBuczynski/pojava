@@ -9,8 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -20,12 +23,36 @@ public class CenterPanel extends JPanel {
 		// TODO Auto-generated constructor stub
 		this.frame = frame;
 		this.setBackground(Color.WHITE);
+		xLineList = new ArrayList<Integer>();
+		yLineList = new ArrayList<Integer>();
+		xCurveList = new ArrayList<Integer>();
+		yCurveList = new ArrayList<Integer>();
+//
+		int counter = 0;
 		adapter = new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent e) {
 			squareX = e.getX();
 			squareY = e.getY();
-			CenterPanel.this.repaint();
+			
+			if(frame.lineEnd.isLine) {
+				xLineList.add(e.getX());
+				yLineList.add(e.getY());
+				for (int i = 0; i < xLineList.size() - 1; ++i) {
+					
+					 Graphics2D g2 = image.createGraphics();
+		             g2.drawLine(xLineList.get(i), yLineList.get(i), xLineList.get(i + 1), yLineList.get(i + 1));
+		          }
+			}
+			else {
+				xLineList.clear();
+				yLineList.clear();
+			}
+			if(frame.lineEnd.isCurve) {
+				xCurveList.add(e.getX());
+				yCurveList.add(e.getY());
+			}
+
 			}
 			public void mouseReleased(MouseEvent e) {
 			if (e.getX() > squareX) squareW = e.getX() - squareX;
@@ -38,18 +65,64 @@ public class CenterPanel extends JPanel {
 				squareH = squareY - e.getY();
 				squareY = e.getY();
 			}
+			
 			if(frame.lineEnd.isSquare) {
 				Graphics2D g2 = image.createGraphics();
 				g2.drawRect(squareX, squareY, squareW, squareH);
+			}
+			if(frame.lineEnd.isCurve) {
+				QuadCurve2D q = new QuadCurve2D.Double();
+				for (int i = 0; i < xCurveList.size() - 1; i++) {
+					
+					 Graphics2D g2 = image.createGraphics();
+					 q.setCurve(xCurveList.get(i), yCurveList.get(i), e.getX(), e.getY(), xCurveList.get(i + 1), yCurveList.get(i + 1));
+					 g2.draw(q);
+		       
+		          }
+				if(xCurveList.size() == 3)
+				{
+					xCurveList.clear();
+					yCurveList.clear();
+				}
+				
 			}
 			CenterPanel.this.repaint();
 		}
 			
 		};
 		motionListener = new MouseMotionListener() {
-			
+				
 			public void mouseMoved(MouseEvent e) {}
 			public void mouseDragged(MouseEvent e) {
+				
+				if(frame.lineEnd.isEraser) {
+					Graphics2D g2 = image.createGraphics();
+					g2.setColor(frame.panel.getBackground());
+					g2.fillRect(e.getX(), e.getY(), 15, 15);
+				}
+				if(frame.lineEnd.isPencil) {
+					Graphics2D g2 = image.createGraphics();
+					g2.fillOval(e.getX(), e.getY(), 5, 5);
+					
+				}
+				if(frame.lineEnd.isCurve) {
+					ctrX = e.getX();
+					ctrY = e.getY();
+//					QuadCurve2D q = new QuadCurve2D.Double();
+//					for (int i = 0; i < xCurveList.size() - 1; i++) {
+//						
+//						 Graphics2D g2 = image.createGraphics();
+//						 q.setCurve(xCurveList.get(i), yCurveList.get(i), e.getX(), e.getY(), xCurveList.get(i + 1), yCurveList.get(i + 1));
+//						 g2.draw(q);
+//			       
+//			          }
+//					if(xCurveList.size() == 3)
+//					{
+//						xCurveList.clear();
+//						yCurveList.clear();
+//					}
+//					
+				}
 				
 				if (e.getX() > squareX) squareW = e.getX() - squareX;
 				else {
@@ -83,8 +156,21 @@ public class CenterPanel extends JPanel {
 		g2d.drawImage(image, 0, 0, this);
 		
 		if(frame.lineEnd.isSquare) {
-
 			g.drawRect(squareX, squareY, squareW, squareH);
+		}
+		if(frame.lineEnd.isCurve) {
+			QuadCurve2D q = new QuadCurve2D.Double();
+			for (int i = 0; i < xCurveList.size() - 1; i++) {
+				
+				 q.setCurve(xCurveList.get(i), yCurveList.get(i), ctrX, ctrY, xCurveList.get(i + 1), yCurveList.get(i + 1));
+				 g2d.draw(q);
+	          }
+			if(xCurveList.size() == 3)
+			{
+				xCurveList.clear();
+				yCurveList.clear();
+			}
+			
 		}
 			
 		
@@ -94,9 +180,18 @@ public class CenterPanel extends JPanel {
 	int squareY;
 	int squareH;
 	int squareW;
+	int ctrX;
+	int ctrY;
 	MouseAdapter adapter;
 	MouseMotionListener motionListener;
 	BufferedImage image;
+	List<Integer> xLineList;
+	List<Integer> yLineList;
+	
+	List<Integer> xCurveList;
+	List<Integer> yCurveList;
+	List<Integer> xCtrlCurveList;
+	List<Integer> yCtrlCurveList;
 	
 
 
