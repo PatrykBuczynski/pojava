@@ -49,15 +49,19 @@ public class MultiListenerFrame extends JFrame implements ChangeListener {
 		button1.addActionListener(new Button1ActionListener());
 		slider1.addChangeListener(this);
 		checkbox1.addItemListener(new Checkbox1ItemListener(slider1));
-		comboBox1.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
+		comboBox1.addActionListener(new ComboBoxListener(this));
 				
-				JComboBox cb = (JComboBox)e.getSource();
-				String wybor = (String)cb.getSelectedItem();
-				comboBox1Label.setText(wybor);
-			}
-		});
+				
+				
+//			//	new ActionListener() {
+//			
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				JComboBox cb = (JComboBox)e.getSource();
+//				String wybor = (String)cb.getSelectedItem();
+//				comboBox1Label.setText(wybor);
+//			}
+//		});
 		
 		
 		
