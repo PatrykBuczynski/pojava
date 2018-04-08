@@ -22,6 +22,10 @@ public class Line {
         	g2d.drawLine(xList.get(i), yList.get(i), xList.get(i + 1), yList.get(i + 1));         
         }
 	}
+	public void clear() {
+		xList.clear();
+		yList.clear();
+	}
 	private List<Integer> xList;
 	private List<Integer> yList;
 	

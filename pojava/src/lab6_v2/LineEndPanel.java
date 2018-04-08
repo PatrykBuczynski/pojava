@@ -50,6 +50,8 @@ public class LineEndPanel extends JPanel {
 				isLine = false;
 				isSquare = false;
 				isCurve = false;
+				frame.center.straightLine.clear();
+				frame.center.wasMousePressed = false;
 				
 				
 			}
@@ -63,6 +65,8 @@ public class LineEndPanel extends JPanel {
 				isLine = false;
 				isSquare = false;
 				isCurve = false;
+				frame.center.straightLine.clear();
+				frame.center.wasMousePressed = false;
 				
 				
 			}
@@ -76,6 +80,8 @@ public class LineEndPanel extends JPanel {
 				isLine = true;
 				isSquare = false;
 				isCurve = false;
+				frame.center.straightLine.clear();
+				frame.center.wasMousePressed = false;
 			}
 		});
 		squareButton.addActionListener(new ActionListener() {
@@ -87,6 +93,8 @@ public class LineEndPanel extends JPanel {
 				isLine = false;
 				isSquare = true;
 				isCurve = false;
+				frame.center.straightLine.clear();
+				frame.center.wasMousePressed = false;
 			}
 		});
 		curveButton.addActionListener(new ActionListener() {
@@ -98,6 +106,8 @@ public class LineEndPanel extends JPanel {
 				isLine = false;
 				isSquare = false;
 				isCurve = true;
+				frame.center.straightLine.clear();
+				frame.center.wasMousePressed = false;
 			}
 		});
 		
