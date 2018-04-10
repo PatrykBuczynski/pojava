@@ -45,7 +45,7 @@ class PanelRysowania extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						//etykieta.setPreferredSize(new Dimension(prostakaty.get(5).getWidth(), prostakaty.get(5).getHeight()));
+						etykieta.setPreferredSize(new Dimension(prostakaty.get(5).getWidth(), prostakaty.get(5).getHeight()));
 						
 						if(i<4) {
 							i++;
