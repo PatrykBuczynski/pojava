@@ -15,7 +15,7 @@ public class MainClass {
 				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				PanelRysowania panel = new PanelRysowania();
 				
-				panel.dodajProstokat(100, 100, 80, 160, Color.BLUE);
+				panel.dodajProstokat(100, 100, 80, 160, Color.BLUE, 3, 4 );
 				
 				for (int i = 1; i<20 ; i++) panel.dodajLosowyProstokat();
 				

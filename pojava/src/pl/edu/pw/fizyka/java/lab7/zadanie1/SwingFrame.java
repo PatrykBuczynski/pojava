@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import javafx.scene.text.Font;
 
 public class SwingFrame extends JFrame {
 	Random rand = new Random();
