@@ -1,29 +1,41 @@
 package lab8;
 
+
+
+import javax.swing.JOptionPane;
+
 public class MyException extends Exception {
+	
+	String correctText;
+	String testedText;
+	String wrongWords = "";
 
-	public MyException() {
+	public MyException(String correctText, String testedText) {
 		// TODO Auto-generated constructor stub
+		
+		this.correctText = correctText;
+		this.testedText = testedText;
+		
+		String [] correctTextTokenizer = correctText.split("\\s");
+		String []  testedTextTokenizer = testedText.split("\\s");
+		
+		for(int i = 0; i<correctTextTokenizer.length; i++) {
+			
+			if(!correctTextTokenizer[i].equals(testedTextTokenizer[i])) {
+				wrongWords = wrongWords + " " + testedTextTokenizer[i];
+			}
+		
+		}
+	}
+	
+	public String getWrongWords() {
+			
+		return wrongWords;
 	}
 
-	public MyException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
+	
+	
 
-	public MyException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
-	}
 
-	public MyException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	public MyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
-	}
 
 }

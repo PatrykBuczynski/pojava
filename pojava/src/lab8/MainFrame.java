@@ -165,13 +165,40 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(!mainEditorPane.getText().equals(completeText)) {
+				SpellingCheckClass spellCheck = new SpellingCheckClass(completeText, mainEditorPane.getText());
+				try {
+					spellCheck.CheckSpelling();
+				}
+				catch(MyException e1) {
 					
-					JOptionPane.showMessageDialog(null, "Text is incorrect!");
+					JOptionPane.showMessageDialog(null, "Text is incorrect! Here is the list of incorrect words: " + e1.getWrongWords());
 				}
-				if(mainEditorPane.getText().equals(completeText)) {
-					JOptionPane.showMessageDialog(null, "Text is correct! Congratulations!");
-				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+//				if(!mainEditorPane.getText().equals(completeText)) {
+//					
+//					throw new MyException(mainEditorPane.getText(), completeText);
+//					wrongSpellingException.CheckSpelling();
+//					String communication = "";
+//					for(int i = 0; i < wrongSpellingException.getWrongWords().size(); i++) {
+//						communication = communication + wrongSpellingException.getWrongWords().get(i);
+//					}
+//					JOptionPane.showMessageDialog(null, "Text is incorrect! Here is the list of incorrect words: " + communication);
+//				}
+				
+//				if(mainEditorPane.getText().equals(completeText)) {
+//					JOptionPane.showMessageDialog(null, "Text is correct! Congratulations!");
+//				}
 				
 			}
 			
