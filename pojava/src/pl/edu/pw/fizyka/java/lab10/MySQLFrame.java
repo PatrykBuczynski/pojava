@@ -66,7 +66,7 @@ public class MySQLFrame extends JFrame {
 
 					}catch(NumberFormatException e) {
 						//System.out.println("To nie jest liczba!");
-						JOptionPane.showMessageDialog(MySQLFrame.this, "Wpisana wartość nie jest liczbą!", "Warning! Błędny format!",  JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(MySQLFrame.this, "Wpisana wartość nie jest liczbą!", "Error! Błędny format!",  JOptionPane.ERROR_MESSAGE);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
