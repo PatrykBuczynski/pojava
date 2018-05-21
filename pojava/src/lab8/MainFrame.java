@@ -173,33 +173,6 @@ public class MainFrame extends JFrame {
 					
 					JOptionPane.showMessageDialog(null, "Text is incorrect! Here is the list of incorrect words: " + e1.getWrongWords());
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-//				if(!mainEditorPane.getText().equals(completeText)) {
-//					
-//					throw new MyException(mainEditorPane.getText(), completeText);
-//					wrongSpellingException.CheckSpelling();
-//					String communication = "";
-//					for(int i = 0; i < wrongSpellingException.getWrongWords().size(); i++) {
-//						communication = communication + wrongSpellingException.getWrongWords().get(i);
-//					}
-//					JOptionPane.showMessageDialog(null, "Text is incorrect! Here is the list of incorrect words: " + communication);
-//				}
-				
-//				if(mainEditorPane.getText().equals(completeText)) {
-//					JOptionPane.showMessageDialog(null, "Text is correct! Congratulations!");
-//				}
-				
 			}
 			
 		});
