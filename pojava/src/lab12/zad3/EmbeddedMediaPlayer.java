@@ -52,7 +52,7 @@ import javafx.stage.Stage;
 
 public class EmbeddedMediaPlayer extends Application {
 
-	private static final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+	private static final String MEDIA_URL = "https://raw.githubusercontent.com/mediaelement/mediaelement-files/master/big_buck_bunny.mp4";
 
 	MediaPlayer mediaPlayer;
 	MediaControl mediaControl;
@@ -82,12 +82,13 @@ public class EmbeddedMediaPlayer extends Application {
 					
 					Media fileMedia = new Media(selectedFile.toURI().toString());
 					mediaPlayer = new MediaPlayer(fileMedia);
+//					Media media = new Media(MEDIA_URL);
+//					mediaPlayer = new MediaPlayer(media);
 					mediaPlayer.setAutoPlay(true);
 					mediaControl = new MediaControl(mediaPlayer);
 					scene.setRoot(mediaControl);
 				}
-//				Media media = new Media(MEDIA_URL);
-//				mediaPlayer = new MediaPlayer(media);
+
 				
 			}
 			
